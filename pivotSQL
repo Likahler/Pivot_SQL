@@ -1,0 +1,32 @@
+select  CAST([Timestamp] AS DATETIME) AS [Timestamp],
+
+[feature1]
+
+
+from
+(
+       select [Tagname],
+                [Timestamp],
+                [value] VALUE
+       from [DB]
+       where [tagname] in  (
+
+
+'feature1'
+
+
+)
+)      as P
+pivot
+(
+    MIN(P.[VALUE])
+    for P.[TAGNAME] in (
+
+
+[feature1]
+
+
+)
+
+) as PIV
+order by Timestamp
